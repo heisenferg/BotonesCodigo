@@ -2,6 +2,7 @@ package com.example.botonescodigo;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         anadeHijos(18);
+        recorrer();
     }
 
 
@@ -24,7 +26,11 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
 
         for (int i = 0; i < g.getChildCount(); i++) {
-
+            View v = g.getChildAt(i);
+            if (v.getClass().getSimpleName().equals("Button")) {
+                b = (Button) v;
+                b.setBackgroundColor(Color.rgb(i*10, i*50, i*30));
+            }
         }
     }
 
@@ -43,10 +49,12 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
             if (i==17){
                 b.setText("reset");
             } else {
-                String va = "Botón" + i;
+                String va = "Botón " + i;
                 b.setText(va);
-                g.addView(b, i);
+
             }
+            g.addView(b, i);
+            b.setOnClickListener(this); // registro en el listener el objeto del compponente b
         }
         System.out.println("Filas: " + g.getRowCount());
         System.out.println("Columnas: " + g.getColumnCount());
@@ -54,6 +62,16 @@ public class MainActivity extends AppCompatActivity implements  View.OnClickList
 
     @Override
     public void onClick(View v) {
+        System.out.println("Se ha pulsado el botón " + v.toString());
 
+        Button b;
+        if (v.getClass().getSimpleName().equals("Button")){
+            b= (Button) v;
+            if(b.getText().equals("reset")){
+                recorrer();
+            } else {
+                b.setBackgroundColor(Color.rgb(255, 255, 255));
+            }
+        }
     }
 }
