@@ -28,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
                     ViewGroup.LayoutParams.WRAP_CONTENT));
 
             //Identificador único:
-            b.setId(View.generateViewId());
+           b.setId(View.generateViewId());
             b.setText("Botón " + i);
             gridLayout.addView(b, i);
         }
